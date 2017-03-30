@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <table class="table table-hover table-responsive" style="margin-left: auto;">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Duration(mins)</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for song in songs %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ song.title }}</td>
+      <td>{{ song.album }}</td>
+      <td>{{ song.duration }}</td>
+      <td><a target="_blank" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;
+          <a role="button" href="{% url 'deletesong' song.id %}"><span class="fa fa-trash text-danger" ></span></a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

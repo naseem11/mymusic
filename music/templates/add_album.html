@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    {%  load bootstrap_tags %}
+
+    <h2>Add Album</h2>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|as_bootstrap}}
+    <button type="submit", class=" btn btn-success pull-right">Save</button>
+    </form>
+
+{% endblock %}
+

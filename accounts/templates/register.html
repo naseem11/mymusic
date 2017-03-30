@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+ {% block navbar %}
+<nav class="navbar navbar-toggleable-md  navbar-dark navbar-green ">
+    <a class="navbar-brand" href="{%url 'home'%}">
+            <strong>Music</strong>
+    </a>
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav1">
+            <ul class="nav navbar-nav ml-auto ">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}?next={% url 'home' %}"><span class="fa fa-sign-in" aria-hidden="true"> Login</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'register'%} "><span class=" fa fa-user-plus" aria-hidden="true"> Register</span></a>
+                </li>
+
+
+
+
+            </ul>
+
+
+
+        </div>
+    </div>
+</nav>
+{% endblock %}
+{% block body %}
+     <form role="form" method="post" action="{% url 'register' %}">
+        <legend>Create a new account</legend>
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Create account</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+
+<div class="row">
+    <div class="col-md-3">
+        <img style=" width:200px; height: 200px; "   src="{{MEDIA_URL}}{{album.artwork}}">
+        <h6 style="padding-top: 7px; padding-left:5px;font-weight: bold">{{ album.title }}</h6>
+        <a role="button" class="btn btn-success" href="{% url 'addsong' album.id %}" >Add Track</a>
+
+
+    </div>
+    <div class="col-md-9">
+    {% if album.song_set.count %}
+      <table class="table table-hover table-responsive" style="margin-left: auto;">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Duration(mins)</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for song in album.song_set.all %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ song.title }}</td>
+      <td>{{ song.duration }}</td>
+      <td><a target="_blank" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;
+          <a role="button" href="{% url 'deletesong' song.id %}"><span class="fa fa-trash text-danger" ></span></a>
+           </td>
+    </tr>
+{% endfor %}
+       </tbody>
+</table>
+    {% endif %}
+
+
+    </div>
+
+</div>
+
+{#<img style=" width:170px; height: 170px;"   src="{{MEDIA_URL}}{{album.artwork}}">#}
+{##}
+{#<h5>by {{album.artist}}</h5>#}
+{#<ul >#}
+{#{% for song in album.song_set.all%}#}
+{#<li>{{song.title}}<a target="_blank" role="button" class=" btn-sm  " href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play"></span> </a> </li>#}
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
+</div>
