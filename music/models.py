@@ -1,9 +1,11 @@
 from django.db import models
 from .file_validator import validate_file_extension
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Album(models.Model):
+    uploader=models.ForeignKey(User)
     title = models.CharField(max_length=50)
     artist = models.CharField(max_length=50)
     genre = models.CharField(blank=True, max_length=50)

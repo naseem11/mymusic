@@ -4,6 +4,7 @@ from .models import Album,Song
 from .forms import AddAlbumForm,AddSongForm
 from .metatags import get_tags_info
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 #
 
 
@@ -12,25 +13,30 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/accounts/login')
 def all_albums(request):
-  albums=Album.objects.all()
+  albums=Album.objects.filter(uploader=request.user)
   return render(request, 'albums.html', {'albums':albums})
 
 @login_required(login_url='/accounts/login')
 def all_songs(request):
-    songs=Song.objects.all()
+    albums=Album.objects.filter(uploader=request.user)
+    songs=Song.objects.filter(album=albums)
     return render(request,'songs.html',{'songs':songs})
 
 @login_required(login_url='/accounts/login')
 def album_detail(request,album_id):
-    album=get_object_or_404(Album,pk=album_id)
+    album=get_object_or_404(Album,pk=album_id,uploader=request.user)
     return render(request,'detail.html',{'album':album})
+
+
 
 @login_required(login_url='/accounts/login')
 def add_album (request):
     if request.method=='POST':
         form=AddAlbumForm(request.POST,request.FILES)
         if form.is_valid():
-            album=form.save()
+            album=form.save(commit=False)
+            album.uploader=request.user
+            album.save()
             return redirect('detail',album.pk)
     else:
         form=AddAlbumForm()
@@ -57,16 +63,26 @@ def add_song(request,album_id):
 
 @login_required(login_url='/accounts/login')
 def delete_album(request,album_id):
-    Album.objects.get(pk=album_id).delete()
+
+    try:
+        Album.objects.get(pk=album_id,uploader=request.user).delete()
+
+    except  :
+        messages.warning(request,'Sorry, you do not have authority to delete this album...')
+        return redirect('home')
     return redirect('home')
 
 @login_required(login_url='/accounts/login')
 def delete_song(request,song_id):
      song_to_delete=Song.objects.get(pk=song_id)
-     album_of_that_song=song_to_delete.album.id
-     song_to_delete.delete()
-     return redirect('detail',album_of_that_song)
-
+     album_id_of_that_song=song_to_delete.album.id
+     album=song_to_delete.album
+     if(album.uploader==request.user):
+         song_to_delete.delete()
+         return redirect('detail',album_id_of_that_song)
+     else:
+         messages.warning(request, "Sorry, you can't delete that song.. ")
+         return redirect('home')
 
 
 
