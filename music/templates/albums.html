@@ -22,6 +22,10 @@
 
               <span class="card-title"><h4>{{ album.title }}<span title="Track(s)" class=" badge badge-success  pull-right  padding-r " > {{ album.song_set.count }}</span>
                  </h4></span>
+                {% if album.year %}
+                    <h6>{{ album.year }}</h6>
+                    <h6>{{ album.rating }}</h6>
+                {% endif %}
 
             </a>
             </div>

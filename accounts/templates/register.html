@@ -32,12 +32,14 @@
 </nav>
 {% endblock %}
 {% block body %}
+    <div >
      <form role="form" method="post" action="{% url 'register' %}">
         <legend>Create a new account</legend>
         {% csrf_token %}
-        {{ form | as_bootstrap }}
+        {{ form.as_p }}
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Create account</button>
+            <button type="submit" class="btn btn-success">Create account </button>
         </div>
     </form>
+    </div>
 {% endblock %}

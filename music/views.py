@@ -1,10 +1,14 @@
-from django.shortcuts import render ,get_object_or_404,redirect,reverse
+from django.shortcuts import render ,get_object_or_404,redirect
 from .models import Album,Song
 # from django.views import generic
 from .forms import AddAlbumForm,AddSongForm
 from .metatags import get_tags_info
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import requests
+from django.core.files.base import ContentFile
+import pitchfork
+
 #
 
 
@@ -36,8 +40,26 @@ def add_album (request):
         if form.is_valid():
             album=form.save(commit=False)
             album.uploader=request.user
+
+
+            try:
+                # json_obj=json.load(urllib2.urlopen('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=4a64c7f3799709a7bacb47f8394e36f8&artist='+album.artist+'&album='+album.title+'&format=json'))
+                # img=json_obj['album']['image'][2]['#text']
+                pitcfork_object=pitchfork.search(album.artist,album.title)
+                img_url=pitcfork_object.cover()
+                album.rating=pitcfork_object.score()
+                album.year=int(pitcfork_object.year())
+
+                image_content = ContentFile(requests.get(img_url).content)
+                album.artwork.save(album.title, image_content)
+            except:
+                pass
+
             album.save()
-            return redirect('detail',album.pk)
+            return redirect('detail', album.pk)
+
+
+
     else:
         form=AddAlbumForm()
         return render(request,'add_album.html', {'form':form})

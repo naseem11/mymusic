@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block custom %}
+{#    musicPlayer style sheet###################}
 
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet">
+{% endblock %}
 {% block body %}
      {% if messages %}
         <div class="alert alert-success">
@@ -20,7 +25,7 @@
 
 
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
     {% if album.song_set.count %}
       <table class="table table-hover table-responsive" style="margin-left: auto;">
   <thead>
@@ -49,14 +54,35 @@
 
     </div>
 
+<div class="col-md-3">
+
+        <div class="player">
+            <div class="pl"></div>
+            <div class="title"></div>
+            <div class="artist"></div>
+            <div class="cover"></div>
+            <div class="controls">
+                <div class="play"></div>
+                <div class="pause"></div>
+                <div class="rew"></div>
+                <div class="fwd"></div>
+            </div>
+            <div class="volume"></div>
+            <div class="tracker"></div>
+        </div>
+        <ul class="playlist hidden">
+            {% for song in album.song_set.all %}
+            <li audiourl="{{ song.file.url }}"  cover="{{ album.artwork.url }}"  artist="{{ album.artist }}">{{ song.title }}</li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
 </div>
 
-{#<img style=" width:170px; height: 170px;"   src="{{MEDIA_URL}}{{album.artwork}}">#}
-{##}
-{#<h5>by {{album.artist}}</h5>#}
-{#<ul >#}
-{#{% for song in album.song_set.all%}#}
-{#<li>{{song.title}}<a target="_blank" role="button" class=" btn-sm  " href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play"></span> </a> </li>#}
+</div>
+
+
 
 
 
@@ -68,4 +94,9 @@
 
 
 {%endblock%}
-</div>
+{%  block scripts %}
+     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui-1.8.21.custom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    {% endblock %}
