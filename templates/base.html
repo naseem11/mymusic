@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sangeet</title>
+    <title>My Music</title>
     <!-- Font Awesome -->
 
 
@@ -31,10 +31,31 @@
 </head>
 
 <body>
+{% block modal %}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" id="modalheader">
+					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+
+                   <p> this text going to be changed by javascript</p>
+
+				</div>
+				<div class="modal-body">
+
+                    <a role="button" id="delbutton"  class="btn btn-outline-danger" >Yes</a>
+                    <button type="button" class="btn btn-outline-success  pull-right" data-dismiss="modal">No</button>
+				</div>
+
+			</div>
+		</div>
+	</div> <!-- **** End of modal**** -->
+        {% endblock %}
+
 {% block navbar %}
 <nav class="navbar navbar-toggleable-md  navbar-dark navbar-green ">
     <a class="navbar-brand" href="{%url 'home'%}">
-            <strong>Music</strong>
+            <strong>My Music</strong>
     </a>
     <div class="container">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +64,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav1">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item active ">
                     <a class="nav-link" href="{% url 'home' %}"><span class="fa fa-home" aria-hidden="true"> Home</span> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -52,10 +73,10 @@
                 <li class="nav-item">
                     <a  title="All Tracks" class="nav-link" href="{%url 'allsongs'%} "><span class="fa fa-music" aria-hidden="true"> Tracks</span></a>
                 </li>
-                 <li class="nav-item">
+                 <li class="nav-item ">
                      <a  class="nav-link" href="{% url 'logout' %}"><span class="fa fa-sign-out" aria-hidden="true"> Log Out</span></a>
                  </li>
-                 <li class="nav-item">
+                 <li class="nav-item ">
                      <a  class="nav-link" href="{% url 'profile' %}"><span class="fa fa-user" aria-hidden="true"> Profile</span></a>
                  </li>
 
@@ -85,7 +106,7 @@
 
 {% endblock%}
 </div>
-{% block scripts %}
+{% block commonScripts %}
     <!-- SCRIPTS -->
     <!-- JQuery -->
      <script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
@@ -95,9 +116,12 @@
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
 
 
+{% endblock %}
+{% block pagescripts %}
 {% endblock %}
 
 

@@ -44,7 +44,8 @@ INSTALLED_APPS = [
      'music',
     'django_forms_bootstrap',
      'accounts',
-     'django_gravatar'
+     'django_gravatar',
+      'django_cleanup'
      #  'home'
     # 'storages'
 ]

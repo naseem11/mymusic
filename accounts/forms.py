@@ -5,22 +5,52 @@ from django.contrib.auth.models import User
 
 
 class UserLoginForm(forms.Form):
-    username_or_email = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username_or_email = forms.CharField(widget=forms.TextInput(attrs={
+            'id': 'username',
+            'class': 'form-control'
+
+                        }))
+    password = forms.CharField( widget=forms.PasswordInput(attrs={
+            'id': 'password',
+            'class': 'form-control'
+                        }))
 
 
 
 class UserRegistrationForm(UserCreationForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'id': 'username',
+        'class': 'form-control',
+
+
+    }))
+
+    email = forms.CharField(widget=forms.TextInput(attrs={
+        'id': 'email',
+        'class': 'form-control'
+    }))
+
+    password1 = forms.CharField( widget=forms.PasswordInput(attrs={
+            'id': 'password1',
+            'class': 'form-control'
+                        }))
 
     password2 = forms.CharField(
-        label='Password Confirmation',
-        widget=forms.PasswordInput
-    )
+
+        widget=forms.PasswordInput(attrs={
+            'id': 'password-confirm',
+            'class': 'form-control'
+                        }))
+
+
+
+
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

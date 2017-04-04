@@ -1,15 +1,72 @@
 {% extends 'register.html' %}
-{% load bootstrap_tags %}
+{#{% load bootstrap_tags %}#}
 
 {% block body %}
-    <div class="center">
-    <form role="form" method="post" action="{% url 'login' %}?next={{ next }}">
-        <legend>Login</legend>
-        {% csrf_token %}
-        {{ form | as_bootstrap }}
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">login</button>
+
+
+    <!--Form with header-->
+<div class=" card center padding-t">
+    <div class="card-block animated fadeInDown">
+
+        <!--Header-->
+        <div class="form-header mycol ">
+            <h3><i class="fa fa-lock"></i> Login</h3>
         </div>
-    </form>
+
+        <!--Body-->
+        <form role="form" method="post" action="{% url 'login' %}?next={{ next }}">
+        <div class="md-form">
+            <i class="fa fa-envelope prefix"></i>
+            {%csrf_token%}
+             {{ form.username_or_email }}
+            <label for="username">Username or email</label>
+        </div>
+
+        <div class="md-form">
+            <i class="fa fa-lock prefix"></i>
+
+            {{ form.password }}
+            <label for="password">Password</label>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Login</button>
+
+        </div>
+        </form>
+
     </div>
+
+
+
+    <!--Footer-->
+    <div class="modal-footer">
+
+        {% if form.non_field_errors %}
+    <ul class='form-errors '>
+        {% for error in form.non_field_errors %}
+            <li><span class="text-danger" style="padding-right: 50px"> {{ error }}</span></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+        <div class="options">
+
+            <p>Not a member? <a role="button" href="{% url 'register' %}">Sign Up</a></p>
+            <p>Forgot <a href="#">Password?</a></p>
+        </div>
+    </div>
+
+</div>
+<!--/Form with header-->
+{#    <div class="center">#}
+{#    <form role="form" method="post" action="{% url 'login' %}?next={{ next }}">#}
+{#        <legend>Login</legend>#}
+{#        {% csrf_token %}#}
+{#        {{ form | as_bootstrap }}#}
+{#        <div class="form-group">#}
+{#            <button type="submit" class="btn btn-success">login</button>#}
+{#        </div>#}
+{#    </form>#}
+{#    </div>#}
 {% endblock %}

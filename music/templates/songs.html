@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
+
 {% if songs %}
-    <table class="table table-hover table-responsive" style="margin-left: auto;">
+    <div style="overflow:scroll; width: 100vw; height: 100vh; " >
+    <table class="table table-hover table-responsive   " style="margin-left: 12em;">
   <thead>
     <tr>
       <th>#</th>
@@ -18,12 +20,14 @@
       <td>{{ song.title }}</td>
       <td>{{ song.album }}</td>
       <td>{{ song.duration }}</td>
-      <td><a target="_blank" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;
-          <a role="button" href="{% url 'deletesong' song.id %}"><span class="fa fa-trash text-danger" ></span></a></td>
+      <td>
+          <a target="_blank" id="songplay" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;
+          <a role="button" id="{{ song.id }}" class="song" data-toggle="modal"  data-target="#myModal"><span class="fa fa-trash text-danger" ></span></a></td>
     </tr>
 {% endfor %}
   </tbody>
 </table>
+    </div>
 {% endif %}
 
 {% endblock %}

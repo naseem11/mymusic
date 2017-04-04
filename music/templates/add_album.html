@@ -2,14 +2,60 @@
 
 
 {% block body %}
-    {%  load bootstrap_tags %}
+{#    {%  load bootstrap_tags %}#}
 
-    <h2>Add Album</h2>
-    <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|as_bootstrap}}
-    <button type="submit", class=" btn btn-success pull-right">Save</button>
-    </form>
+
+    <!--Form with header-->
+<div class="card center padding-t">
+    <div class="card-block animated fadeInDown">
+
+        <!--Header-->
+        <div class="form-header mycol">
+            <h3><i class="fa fa-plus"></i> Add Album</h3>
+        </div>
+
+        <!--Body-->
+         <form method="POST" action="{% url 'addalbum' %}">
+        <div class="md-form">
+            {% csrf_token %}
+            {{ form.title }}
+            <label for="title">Title</label>
+        </div>
+
+        <div class="md-form">
+
+           {{ form.artist }}
+            <label for="artist">Artist</label>
+        </div>
+        <div class="md-form">
+
+           {{ form.genre }}
+            <label for="genre">Genre</label>
+        </div>
+
+
+
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+         </form>
+
+    </div>
+
+    <!--Footer-->
+
+
+</div>
+<!--/Form with header-->
+{#    <h2>Add Album</h2>#}
+{#    <form method="POST" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form|as_bootstrap}}#}
+{#    <button type="submit", class=" btn btn-success pull-right">Save</button>#}
+{#    </form>#}
 
 {% endblock %}
 

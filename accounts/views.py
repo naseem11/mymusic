@@ -8,14 +8,23 @@ from django.template.context_processors import csrf
 
 
 # Create your views here.
+
+# logout.................................
 def logout(request):
     auth.logout(request)
-    messages.success(request, 'You have successfully logged out')
+    # messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
+
+# profile...............
 
 @login_required(login_url='/accounts/login')
 def profile(request):
     return render(request, 'profile.html')
+
+
+# Login..................................
+
+
 def login(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
@@ -25,7 +34,7 @@ def login(request):
 
             if user is not None:
                 auth.login(request, user)
-                messages.error(request, "You have successfully logged in")
+                # messages.error(request, "You have successfully logged in")
 
                 if request.GET and 'next' in request.GET:
                     next = request.GET['next']
@@ -42,6 +51,10 @@ def login(request):
     args.update(csrf(request))
     return render(request, 'login.html', args)
 
+
+
+# Registration.........................
+
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -53,7 +66,7 @@ def register(request):
 
             if user:
                 auth.login(request, user)
-                messages.success(request, "You have successfully registered . Lets start adding some music..")
+                messages.success(request, "Signed up successfully ,Start adding some music..")
                 return redirect(reverse('home'))
 
             else:

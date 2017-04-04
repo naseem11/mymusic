@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load gravatar %}
 {% block body %}
-    <img src="{% gravatar_url user.email 150 %}" style="width:100px; height: 100px; background-color: #12ABB2; color: #ffffff;" class="img-circle">
-    <h2>Success!</h2>
-    <p>You are logged in as {{ user.email }} </p>
+   <div class="center"><img src="{% gravatar_url user.email 150 %}" style="width:100px; height: 100px; background-color: #12ABB2; color: #ffffff;" class="img-circle">
+
+    <h4>You are logged in as {{ user.username }} </h4>
+    <h5>{{ user.email }}</h5>
+    </div>
 {% endblock %}
 

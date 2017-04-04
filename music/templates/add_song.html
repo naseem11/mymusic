@@ -1,13 +1,49 @@
 {%  extends 'base.html' %}
 {% block body %}
 
-    {%  load bootstrap_tags %}
+{#    {%  load bootstrap_tags %}#}
+    <div class="card center padding-t">
+    <div class="card-block animated fadeInDown">
 
-    <h2>Add Track</h2>
-    <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|as_bootstrap}}
-    <button type="submit", class=" btn btn-success pull-right">Add</button>
-    </form>
+        <!--Header-->
+        <div class="form-header mycol">
+            <h3><i class="fa fa-music"></i> Add Track</h3>
+        </div>
+
+        <!--Body-->
+        <form method="POST" enctype="multipart/form-data">
+              <label for="song" class="font-weight-bold">Track</label>
+             {% csrf_token %}
+        <div class="md-form">
+            {% csrf_token %}
+            {{ form.file }}
+
+        </div>
+
+
+
+
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+         </form>
+
+    </div>
+
+    <!--Footer-->
+
+
+</div>
+
+
+{#    <h2>Add Track</h2>#}
+{#    <form method="POST" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {{ form|as_bootstrap}}#}
+{#    <button type="submit", class=" btn btn-success pull-right">Add</button>#}
+{#    </form>#}
 
 {% endblock %}

@@ -18,32 +18,47 @@
 <div class="container">
 
 <div class="row">
-    <div class="col-md-3">
-        <img style=" width:200px; height: 200px; "   src="{{MEDIA_URL}}{{album.artwork}}">
-        <h6 style="padding-top: 7px; padding-left:5px;font-weight: bold">{{ album.title }}</h6>
-        <a role="button" class="btn btn-success" href="{% url 'addsong' album.id %}" >Add Track</a>
+
+
+
+    <div class="col-md-8 push-md-1 animated fadeInLeft ">
+       <div class="col-md-7" >
+           <div style="float: left">
+          <img style=" width:200px; height: 200px; "   src="{{MEDIA_URL}}{{album.artwork}}">
+               </div>
+          <div class="float-right " style="padding-top: 40px;" >
+          <span class="album_title">Title : {{ album.title }} </span>
+              <span class="album_artist">Artist : {{ album.artist }} </span>
+           <a role="button" style="margin-top: 40px;" class="btn btn-success btn-sm" href="{% url 'addsong' album.id %}" >Add Track</a>
+
+          </div>
+
+
+
 
 
     </div>
-    <div class="col-md-6">
+
+
     {% if album.song_set.count %}
       <table class="table table-hover table-responsive" style="margin-left: auto;">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Duration(mins)</th>
-      <th>Action</th>
-    </tr>
-  </thead>
+{#  <thead>#}
+{#    <tr>#}
+{#      <th>#</th>#}
+{#      <th>Title</th>#}
+{#      <th>Duration(mins)</th>#}
+{#      <th>Action</th>#}
+{#    </tr>#}
+{#  </thead>#}
   <tbody>
         {% for song in album.song_set.all %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ song.title }}</td>
       <td>{{ song.duration }}</td>
-      <td><a target="_blank" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;
-          <a role="button" href="{% url 'deletesong' song.id %}"><span class="fa fa-trash text-danger" ></span></a>
+      <td>
+{#          <a target="_blank" role="button"  href="{{ MEDIA_URL }}{{ song.file }}"><span class="fa fa-play text-success"></span> </a>&nbsp;#}
+          <a role="button" id="{{ song.id }}" class="song" data-toggle="modal"  data-target="#myModal"><span class="fa fa-trash text-danger" ></span></a>
            </td>
     </tr>
 {% endfor %}
@@ -54,8 +69,7 @@
 
     </div>
 
-<div class="col-md-3">
-
+<div class="col-md-3 pull-md-1 animated fadeInRight ">
         <div class="player">
             <div class="pl"></div>
             <div class="title"></div>
@@ -70,6 +84,7 @@
             <div class="volume"></div>
             <div class="tracker"></div>
         </div>
+
         <ul class="playlist hidden">
             {% for song in album.song_set.all %}
             <li audiourl="{{ song.file.url }}"  cover="{{ album.artwork.url }}"  artist="{{ album.artist }}">{{ song.title }}</li>
@@ -77,10 +92,12 @@
 
         </ul>
 
-    </div>
-</div>
+
 
 </div>
+    <div class="example">
+
+    </div>
 
 
 
@@ -94,9 +111,12 @@
 
 
 {%endblock%}
-{%  block scripts %}
-     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+
+
+
+{%  block pagescripts %}
+
     <script type="text/javascript" src="{% static 'js/jquery-ui-1.8.21.custom.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
-    {% endblock %}
+ {% endblock %}

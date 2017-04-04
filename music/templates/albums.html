@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 
+
+{##}
     {% if messages %}
         <div class="alert alert-success">
             <div class="messages">
@@ -11,13 +13,28 @@
         </div>
     {% endif %}
 
- <div class="row">
+ <div class="row animated fadeInDown">
+
+
+
  {% for album in albums  %}
-        <div class="col s12 m7">
+        <div class="col-md-3">
           <div class="card small custom-card">
             <div class="card-image ">
             <a href="{%  url 'detail' album.id %}" >
-                <img src="{{ MEDIA_URL }}{{ album.artwork }}">
+            <div class="view overlay hm-black-strong">
+            <img src="{{ MEDIA_URL }}{{ album.artwork }}">
+
+           <div class="mask flex-center">
+             <ul>
+        {%  for song in album.song_set.all %}
+        <li class="white-text font-bold"> {{ song.title }}</li>
+        {% endfor %}
+    </div>
+            </ul>
+
+</div>
+
 
 
               <span class="card-title"><h4>{{ album.title }}<span title="Track(s)" class=" badge badge-success  pull-right  padding-r " > {{ album.song_set.count }}</span>
@@ -27,10 +44,11 @@
                     <h6>{{ album.rating }}</h6>
                 {% endif %}
 
+{#             %#}
             </a>
             </div>
             <div class="card-content">
-                <span class="font-bold">By {{ album.artist }}</span><a role="button" title="Delete Album" href="{% url 'deletealbum' album.id %}"><span class="fa fa-trash fa-2x text-danger pull-right padding-r "></span> </a>
+                <span class="font-bold">By {{ album.artist }}</span><a id="{{ album.id }}"  class="album"  role="button" title="Delete Album" data-toggle="modal"  data-target="#myModal"><span class="fa fa-trash fa-2x text-danger pull-right padding-r "></span> </a>
             </div>
 
           </div>
