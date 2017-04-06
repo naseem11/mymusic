@@ -1,0 +1,1 @@
+web: gunicorn mymusic.wsgi:application
