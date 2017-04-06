@@ -1,15 +1,15 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from .models import Album,Song
-# from django.views import generic
+
 from .forms import AddAlbumForm,AddSongForm
 from .metatags import get_tags_info
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import requests
 from django.core.files.base import ContentFile
-# import pitchfork
 
-#
+
+
 
 
 
