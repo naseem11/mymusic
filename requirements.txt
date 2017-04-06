@@ -13,6 +13,7 @@ olefile==0.44
 packaging==16.8
 Pillow==4.0.0
 pitchfork==0.1.4
+psycopg2==2.7.1
 pyparsing==2.2.0
 requests==2.13.0
 six==1.10.0
