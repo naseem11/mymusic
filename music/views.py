@@ -1,5 +1,6 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from .models import Album,Song
+import os
 
 from .forms import AddAlbumForm,AddSongForm
 from .metatags import get_tags_info
@@ -47,7 +48,8 @@ def add_album (request):
 
 
             try:
-                rquest=requests.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=4a64c7f3799709a7bacb47f8394e36f8&artist='+album.artist+'&album='+album.title+'&format=json')
+                api_key=os.environ.get('API_KEY')
+                rquest=requests.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+api_key+'&artist='+album.artist+'&album='+album.title+'&format=json')
                 json_object=rquest.json()
                 img_url=json_object['album']['image'][2]['#text']
 
