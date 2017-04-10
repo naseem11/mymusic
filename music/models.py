@@ -9,7 +9,7 @@ class Album(models.Model):
     title = models.CharField(max_length=50)
     artist = models.CharField(max_length=50)
     genre = models.CharField(blank=True, max_length=50)
-    artwork = models.ImageField(upload_to='artworks', blank=True, null=True,default='/artworks/default_artwork.jpg')
+    artwork = models.ImageField(upload_to='artworks')
 
     def __str__(self):
         return self.title + ' by ' + self.artist

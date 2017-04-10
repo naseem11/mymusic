@@ -1,7 +1,8 @@
 {%  extends 'base.html' %}
+{% load static from staticfiles %}
 {% block body %}
 
-{#    {%  load bootstrap_tags %}#}
+
     <div class="card center padding-t">
     <div class="card-block animated fadeInDown">
 
@@ -11,7 +12,7 @@
         </div>
 
         <!--Body-->
-        <form method="POST" enctype="multipart/form-data">
+        <form  method="POST" enctype="multipart/form-data">
               <label for="song" class="font-weight-bold">Track</label>
              {% csrf_token %}
         <div class="md-form">
@@ -31,19 +32,15 @@
         </div>
          </form>
 
+
     </div>
 
-    <!--Footer-->
+
 
 
 </div>
 
 
-{#    <h2>Add Track</h2>#}
-{#    <form method="POST" enctype="multipart/form-data">#}
-{#    {% csrf_token %}#}
-{#    {{ form|as_bootstrap}}#}
-{#    <button type="submit", class=" btn btn-success pull-right">Add</button>#}
-{#    </form>#}
+
 
 {% endblock %}

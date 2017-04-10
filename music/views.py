@@ -56,7 +56,9 @@ def add_album (request):
                 image_content = ContentFile(requests.get(img_url).content)
                 album.artwork.save(album.title, image_content)
             except:
-                pass
+
+                img_url='https://s3-eu-west-1.amazonaws.com/sangeet-app/media/artworks/default_artwork.png'
+                album.artwork.save(album.title,ContentFile(requests.get(img_url).content))
 
             album.save()
             return redirect('detail', album.pk)
