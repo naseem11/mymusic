@@ -1,5 +1,5 @@
 {%  extends 'base.html' %}
-{% load static from staticfiles %}
+
 {% block body %}
 
 
@@ -12,7 +12,7 @@
         </div>
 
         <!--Body-->
-        <form  method="POST" enctype="multipart/form-data">
+        <form  method="POST"  enctype="multipart/form-data">
               <label for="song" class="font-weight-bold">Track</label>
              {% csrf_token %}
         <div class="md-form">

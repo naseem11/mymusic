@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^accounts/', include((account_urls))),
     # url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     url(r'', index, name='index' ),
+
 ]

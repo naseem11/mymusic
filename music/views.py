@@ -1,5 +1,6 @@
 from django.shortcuts import render ,get_object_or_404,redirect
 from .models import Album,Song
+from django.db.models import Q
 import os
 
 from .forms import AddAlbumForm,AddSongForm
@@ -15,21 +16,19 @@ from django.core.files.base import ContentFile
 
 
 
+
 # Create your views here.
 @login_required(login_url='/accounts/login')
 def all_albums(request):
   albums=Album.objects.filter(uploader=request.user)
-  return render(request, 'albums.html', {'albums':albums})
+  return render(request, 'home.html', {'albums':albums})
 
 @login_required(login_url='/accounts/login')
 def all_songs(request):
     albums=Album.objects.filter(uploader=request.user)
-    songs=[]
-    for album in albums:
-        list_of_songs=Song.objects.filter(album=album)
-        for song in list_of_songs:
-            songs.append(song)
-    return render(request,'songs.html',{'songs':songs})
+    songs=Song.objects.filter(album__in=albums)
+
+    return render(request, 'home.html', {'songs':songs})
 
 @login_required(login_url='/accounts/login')
 def album_detail(request,album_id):
@@ -68,6 +67,7 @@ def add_album (request):
     else:
         form=AddAlbumForm()
         return render(request,'add_album.html', {'form':form})
+    
 
 @login_required(login_url='/accounts/login')
 def add_song(request,album_id):
@@ -86,6 +86,7 @@ def add_song(request,album_id):
         form=AddSongForm()
         return render(request,'add_song.html',{'form':form})
 
+
 @login_required(login_url='/accounts/login')
 def delete_album(request,album_id):
 
@@ -93,10 +94,11 @@ def delete_album(request,album_id):
         Album.objects.get(pk=album_id,uploader=request.user).delete()
 
     except :
-        pass
-        # messages.warning(request,'Sorry, you do not have authority to delete this album...')
+        # pass
+        messages.warning(request,'Sorry, you do not have permission to delete this album...')
 
     return redirect('home')
+
 
 @login_required(login_url='/accounts/login')
 def delete_song(request,song_id):
@@ -112,20 +114,32 @@ def delete_song(request,song_id):
 
 
 
-       # album=get_object_or_404(Album,id=album_id)
-       # return render(request,'detail.html',{'album':album})
+@login_required(login_url='/accounts/login')
+def search_music(request):
+    albums = Album.objects.filter(uploader=request.user)
+    song_results=Song.objects.filter(album__in=albums)
+
+    query = request.GET.get("query")
+    if query:
+        albums = albums.filter(
+            Q(title__icontains=query) |
+            Q(artist__icontains=query)
+        ).distinct()
+        if(albums):
+            return render(request, 'home.html', {'albums':albums})
+        song_results = song_results.filter(
+            Q(title__icontains=query)
+        ).distinct()
+        if (song_results):
+            return render(request, 'home.html', {'songs': song_results})
+        if (not (albums or song_results)):
+            messages.warning(request,"Sorry , your search did not return  any  result , please go to home page...")
+            return render(request, 'home.html')
 
 
-# class HomeView(generic.ListView):
-#     template_name = 'albums.html'
-#     context_object_name = 'albums'
-#
-#     def get_queryset(self):
-#         return Album.objects.all()
-#
-# class DetailView(generic.DetailView):
-#     model = Album
-#     template_name = 'detail.html'
+
+    else:
+        return render(request, 'home.html', {'albums': albums})
 
 
 
