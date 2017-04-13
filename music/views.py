@@ -50,7 +50,7 @@ def add_album (request):
                 api_key=os.environ.get('API_KEY')
                 rquest=requests.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+api_key+'&artist='+album.artist+'&album='+album.title+'&format=json')
                 json_object=rquest.json()
-                img_url=json_object['album']['image'][2]['#text']
+                img_url=json_object['album']['image'][3]['#text']
 
                 image_content = ContentFile(requests.get(img_url).content)
                 album.artwork.save(album.title, image_content)
@@ -67,7 +67,7 @@ def add_album (request):
     else:
         form=AddAlbumForm()
         return render(request,'add_album.html', {'form':form})
-    
+
 
 @login_required(login_url='/accounts/login')
 def add_song(request,album_id):
@@ -123,7 +123,8 @@ def search_music(request):
     if query:
         albums = albums.filter(
             Q(title__icontains=query) |
-            Q(artist__icontains=query)
+            Q(artist__icontains=query)|
+            Q(genre__icontains=query)
         ).distinct()
         if(albums):
             return render(request, 'home.html', {'albums':albums})

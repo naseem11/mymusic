@@ -79,3 +79,4 @@ def register(request):
     args.update(csrf(request))
 
     return render(request, 'register.html', args)
+

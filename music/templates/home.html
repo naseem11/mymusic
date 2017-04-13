@@ -13,15 +13,15 @@
         </div>
     {% endif %}
 
- <div class="row animated zoomIn">
+ <div class="row animated zoomIn" >
 
  {% for album in albums  %}
         <div class="col-md-3">
-          <div class="card small custom-card">
+          <div class="card small custom-card" >
             <div class="card-image ">
             <a href="{%  url 'detail' album.id %}" >
-            <div class="view overlay hm-black-strong">
-            <img src="{{ MEDIA_URL }}{{ album.artwork }}">
+            <div class="view overlay hm-black-strong" >
+            <img src="{{ MEDIA_URL }}{{ album.artwork }}" >
 
            <div class="mask flex-center">
              <ul>
@@ -58,7 +58,7 @@
 
      {% if songs %}
 {#    <div style="overflow:scroll; width: 100vw; height: 100vh; " >#}
-    <table class="table table-hover table-responsive   " style="margin-left: 12em;">
+    <table class="table table-hover table-responsive " style="margin-left: 12em;">
   <thead>
     <tr>
       <th>#</th>

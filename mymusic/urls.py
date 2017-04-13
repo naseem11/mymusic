@@ -19,7 +19,7 @@ from music import urls as music_urls
 # from django.views.static import serve
 # from .settings import MEDIA_ROOT
 from .views import index
-from accounts import urls as account_urls
+from accounts import urls as accounts_urls
 
 
 
@@ -27,8 +27,9 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^music/', include(music_urls)),
-    url(r'^accounts/', include((account_urls))),
+    url(r'^accounts/', include((accounts_urls))),
     # url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+    # url(r'^user/', include(accounts_urls)),
     url(r'', index, name='index' ),
 
 ]
