@@ -45,7 +45,21 @@ Music can be searched by artist , by album , by genre or by track.
 **Language :** Python
 
 **Framework :** Django
+
 **Packages :** 
-* hsaudiotag
-* Pillow
+* hsaudiotag - to process the meda data of audio files
+* django-cleanup - for automatic cleanup of FileField and ImageField
+* django-gravatar2 
+* Pillow , and some more..
+
+**API :** LastFm api to get the album artwork (cover)
+
+## Storage
+
+**Database :** PostgreSQL
+
+**Cloud Storage :** Amazon S3 bucket - to store all the static and media files
+
+**Hosting :** Heroku
+
 
