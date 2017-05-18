@@ -22,6 +22,7 @@ Just click on the album ,you want to add a new track to.You will be redirected t
 
 ![detail_page](https://cloud.githubusercontent.com/assets/22799847/26198803/66fcb97c-3bbf-11e7-822c-bde789479dd8.PNG)
 
+user just need to select the track to add , track's information like title and duration of the track is retreived by processing the meta data of the track.
 
 ![addsong_page](https://cloud.githubusercontent.com/assets/22799847/26198801/66fc4190-3bbf-11e7-99da-0e8389d1785a.PNG)
 
