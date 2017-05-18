@@ -47,12 +47,12 @@ Music can be searched by artist , by album , by genre or by track.
 **Framework :** Django
 
 **Packages :** 
-* hsaudiotag - to process the meda data of audio files
-* django-cleanup - for automatic cleanup of FileField and ImageField
-* django-gravatar2 
-* Pillow , and some more..
+* **hsaudiotag** - to process the meda data of audio files
+* **django-cleanup** - for automatic cleanup of FileField and ImageField
+* **django-gravatar2** 
+* **Pillow** , and some more..
 
-**API :** LastFm api to get the album artwork (cover)
+**API :** Last.fm api to get the album artwork (cover)
 
 ## Storage
 
