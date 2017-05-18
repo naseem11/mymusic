@@ -37,11 +37,15 @@ Music can be searched by artist , by album , by genre or by track.
 ## Client Side
 
 **languages :** HTML, CSS, JavaScript
+
 **Framework and Library :** Bootstrap, Jquery
 
 ## Server Side 
 
 **Language :** Python
+
 **Framework :** Django
-**Packages :**  * hsaudiotag * Pillow
+**Packages :** 
+* hsaudiotag
+* Pillow
 
