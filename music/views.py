@@ -2,7 +2,6 @@ from django.shortcuts import render ,get_object_or_404,redirect
 from .models import Album,Song
 from django.db.models import Q
 import os
-
 from .forms import AddAlbumForm,AddSongForm
 from .metatags import get_tags_info
 from django.contrib.auth.decorators import login_required
@@ -17,11 +16,12 @@ from django.core.files.base import ContentFile
 
 
 
-# Create your views here.
+
 @login_required(login_url='/accounts/login')
 def all_albums(request):
   albums=Album.objects.filter(uploader=request.user)
   return render(request, 'home.html', {'albums':albums})
+
 
 @login_required(login_url='/accounts/login')
 def all_songs(request):
@@ -95,7 +95,7 @@ def delete_album(request,album_id):
         Album.objects.get(pk=album_id,uploader=request.user).delete()
 
     except :
-        # pass
+
         messages.warning(request,'Sorry, you do not have permission to delete this album...')
 
     return redirect('home')

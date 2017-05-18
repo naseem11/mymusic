@@ -7,7 +7,7 @@ from accounts.forms import UserRegistrationForm, UserLoginForm
 from django.template.context_processors import csrf
 
 
-# Create your views here.
+
 
 # logout.................................
 def logout(request):
@@ -15,16 +15,14 @@ def logout(request):
     # messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
 
-# profile...............
 
+# profile...............
 @login_required(login_url='/accounts/login')
 def profile(request):
     return render(request, 'profile.html')
 
 
 # Login..................................
-
-
 def login(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
@@ -66,7 +64,7 @@ def register(request):
 
             if user:
                 auth.login(request, user)
-                messages.success(request, "Signed up successfully ,Start adding some music..")
+                messages.success(request, "Signed up successfully ,let's start adding some music..")
                 return redirect(reverse('home'))
 
             else:
