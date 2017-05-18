@@ -16,7 +16,7 @@ To create a new album user needs to specify the title , artist and genre of the 
 
 ![home_page](https://cloud.githubusercontent.com/assets/22799847/26198802/66fcbbd4-3bbf-11e7-9030-940273a57448.PNG)
 
-###Adding a track
+### Adding a track
 
 Just click on the album ,you want to add a new track to.You will be redirected to that album page there 'add track' button can be clicked to add a new track to that album.
 
