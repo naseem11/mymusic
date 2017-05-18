@@ -28,6 +28,6 @@ user just need to select the track to add , track's information like title and d
 
 ## Searching
 
-Music can be searched by artist , by album , by genre or by any track.
+Music can be searched by artist , by album , by genre or by track.
 
 ![search_result](https://cloud.githubusercontent.com/assets/22799847/26198800/66f9e300-3bbf-11e7-83e2-429c404a82c5.PNG)
