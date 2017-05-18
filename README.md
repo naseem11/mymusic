@@ -10,7 +10,7 @@ This application can be used by registered users only.So after signing up you ca
 
 ### Adding a new album
 
-write about adding a album here..
+To create a new album user needs to specify the title , artist and genre of the album, with this information , application goes to 'lastfm' to pull the artwork(cover) of the album.If the album does not exist on the lastfm , artwork is updated with a default artwork.
 
 ![addalbum_page](https://cloud.githubusercontent.com/assets/22799847/26198799/66f91060-3bbf-11e7-9206-6e64ba765cde.PNG)
 
