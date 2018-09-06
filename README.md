@@ -2,7 +2,7 @@
 
 # What is MyMusic?
 
-MyMusic is web application which allows users to upload, store, and play all of their music from the cloud. Music can be managed and listened to, from any device, anywhere in the world. An user can have access to  his/her music only.
+MyMusic is web application which allows users to upload, store, and play  their music from the cloud. Music can be managed and listened to, from any device over the internet . An user can  access  only  his/her uploaded music.
 
 ## How does it work?
 
